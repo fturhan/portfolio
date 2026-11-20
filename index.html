@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr" class="scroll-smooth">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
@@ -14,1136 +14,1003 @@
     <meta property="og:description"
         content="Expert Python, Django, FastAPI et IA générative. Projets en cours : Ecoroulez, PoliScope, Vocalist, Filterable.">
     <meta property="og:locale" content="fr_FR">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'primary-dark': '#0f172a',
-                        'slate-950': '#020617',
-                        'accent-cyan': '#22d3ee',
-                        'accent-violet': '#8b5cf6',
-                        'accent-emerald': '#10b981',
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
-                        display: ['Montserrat', 'Inter', 'sans-serif'],
-                    },
-                    backgroundImage: {
-                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-                        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-                    }
-                }
-            }
-        }
-    </script>
-    <!-- Fonts & Icons -->
+    <meta name="theme-color" content="#ffffff">
+    <link rel="icon"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23111'/%3E%3Crect x='7' y='6' width='5' height='20' fill='%23fff'/%3E%3Crect x='7' y='6' width='15' height='5' fill='%23fff'/%3E%3Crect x='7' y='14' width='11' height='4' fill='%23fff'/%3E%3Crect x='21' y='21' width='5' height='5' fill='%23ff4f1f'/%3E%3C/svg%3E">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@700;800;900&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;800&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --glass-bg: rgba(15, 23, 42, 0.65);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --accent-gradient: linear-gradient(135deg, #22d3ee 0%, #8b5cf6 100%);
+            --ink: #111111;
+            --muted: #5c5c5c;
+            --rule: #dcdcdc;
+            --accent: #ff4f1f;
+            --bg: #ffffff;
+            --max: 1200px;
         }
 
-        .glass {
-            background: var(--glass-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid var(--glass-border);
+        * {
+            box-sizing: border-box;
         }
 
-        .glass-header {
-            background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        html {
+            scroll-behavior: smooth;
         }
 
-        .text-gradient {
-            background: var(--accent-gradient);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--ink);
+            font-family: 'Archivo', system-ui, -apple-system, sans-serif;
+            font-size: 17px;
+            line-height: 1.55;
+            -webkit-font-smoothing: antialiased;
         }
 
-        .bg-gradient-accent {
-            background: var(--accent-gradient);
+        a {
+            color: inherit;
         }
 
-        .nav-link {
-            position: relative;
-            transition: color 0.3s ease;
+        ::selection {
+            background: var(--accent);
+            color: #fff;
         }
 
-        .nav-link::after {
-            content: '';
+        .sr-only {
             position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent-gradient);
-            transition: width 0.3s ease;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+            clip: rect(0 0 0 0);
+            white-space: nowrap;
         }
 
-        .nav-link:hover::after {
-            width: 100%;
+        .wrap {
+            max-width: var(--max);
+            margin: 0 auto;
+            padding: 0 32px;
         }
 
-        .hero-glow {
-            filter: blur(120px);
-            opacity: 0.15;
-            transition: all 1s ease-in-out;
-        }
-
-        .card-hover {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .card-hover:hover {
-            transform: translateY(-8px) scale(1.01);
-            border-color: rgba(34, 211, 238, 0.3);
-            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5), 0 0 20px rgba(34, 211, 238, 0.1);
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -17px;
-            top: 8px;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: #22d3ee;
-            border: 3px solid #0f172a;
-            z-index: 10;
-        }
-
-        .scroll-progress {
-            position: fixed;
+        /* Top bar */
+        .top {
+            position: sticky;
             top: 0;
+            z-index: 10;
+            background: var(--bg);
+            border-bottom: 1px solid var(--ink);
+        }
+
+        .top .wrap {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            height: 56px;
+        }
+
+        .brand {
+            font-weight: 800;
+            text-decoration: none;
+            letter-spacing: -0.01em;
+        }
+
+        .brand span {
+            color: var(--accent);
+        }
+
+        .nav {
+            display: flex;
+            gap: 24px;
+            font-size: 14px;
+        }
+
+        .nav a {
+            text-decoration: none;
+        }
+
+        .nav a:hover {
+            color: var(--accent);
+        }
+
+        /* Hero */
+        .hero {
+            padding-top: 72px;
+        }
+
+        .eyebrow {
+            font-size: 15px;
+            color: var(--muted);
+            margin: 0 0 20px;
+        }
+
+        .display {
+            font-size: clamp(64px, 13vw, 168px);
+            line-height: 0.88;
+            font-weight: 800;
+            letter-spacing: -0.045em;
+            margin: 0;
+        }
+
+        .display .accent {
+            color: var(--accent);
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+            gap: 32px 48px;
+            margin-top: 56px;
+            padding-top: 24px;
+            border-top: 1px solid var(--ink);
+        }
+
+        .lead {
+            font-size: clamp(20px, 2.2vw, 26px);
+            line-height: 1.35;
+            letter-spacing: -0.01em;
+            margin: 0;
+        }
+
+        .contact {
+            display: grid;
+            grid-template-columns: auto minmax(0, 1fr);
+            gap: 10px 20px;
+            margin: 0;
+            font-size: 15px;
+        }
+
+        .contact dt {
+            color: var(--muted);
+        }
+
+        .contact dd {
+            margin: 0;
+        }
+
+        .contact a {
+            text-decoration-color: var(--rule);
+            text-underline-offset: 3px;
+        }
+
+        .contact a:hover {
+            color: var(--accent);
+            text-decoration-color: var(--accent);
+        }
+
+        /* Sections */
+        .sec {
+            display: grid;
+            grid-template-columns: minmax(0, 3fr) minmax(0, 9fr);
+            gap: 24px 32px;
+            margin-top: 128px;
+            padding-top: 20px;
+            border-top: 2px solid var(--ink);
+            scroll-margin-top: 72px;
+        }
+
+        .sec-head .n {
+            display: block;
+            color: var(--muted);
+            font-weight: 500;
+            font-size: 14px;
+            margin-bottom: 6px;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .sec-head h2 {
+            font-size: clamp(28px, 3vw, 36px);
+            line-height: 1.05;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            margin: 0;
+        }
+
+        .sec-head p {
+            color: var(--muted);
+            font-size: 15px;
+            margin: 12px 0 0;
+            max-width: 28ch;
+        }
+
+        /* Projects */
+        .proj {
+            display: grid;
+            grid-template-columns: 44px minmax(0, 1fr) auto;
+            gap: 6px 16px;
+            padding: 32px 0;
+            border-top: 1px solid var(--rule);
+        }
+
+        .proj:first-child {
+            border-top: 0;
+            padding-top: 4px;
+        }
+
+        .idx {
+            color: var(--accent);
+            font-weight: 500;
+            font-size: 15px;
+            padding-top: 8px;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .proj h3 {
+            font-size: clamp(26px, 3vw, 34px);
+            line-height: 1.05;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            margin: 0;
+        }
+
+        .sub {
+            color: var(--muted);
+            margin: 4px 0 0;
+        }
+
+        .status {
+            font-size: 13px;
+            padding-top: 10px;
+            white-space: nowrap;
+        }
+
+        .status::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            margin-right: 8px;
+            border: 1.5px solid currentColor;
+            vertical-align: 0;
+        }
+
+        .status.live::before {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .proj-body {
+            grid-column: 2 / -1;
+            margin-top: 14px;
+        }
+
+        .proj-body p {
+            margin: 0 0 14px;
+            max-width: 62ch;
+        }
+
+        .points {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 16px;
+            max-width: 62ch;
+        }
+
+        .points li {
+            position: relative;
+            padding-left: 24px;
+            margin: 6px 0;
+        }
+
+        .points li::before {
+            content: '—';
+            position: absolute;
             left: 0;
-            width: 0%;
-            height: 3px;
-            background: var(--accent-gradient);
-            z-index: 100;
+            color: var(--muted);
         }
 
-        @keyframes float {
-            0% {
-                transform: translateY(0px);
-            }
+        .stack {
+            font-size: 14px;
+            color: var(--muted);
+            margin: 0;
+        }
 
-            50% {
-                transform: translateY(-10px);
-            }
+        .links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 20px;
+        }
 
-            100% {
-                transform: translateY(0px);
+        .btn {
+            display: inline-block;
+            padding: 10px 16px;
+            background: var(--ink);
+            border: 1px solid var(--ink);
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+        }
+
+        .btn:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .btn.ghost {
+            background: transparent;
+            color: var(--ink);
+        }
+
+        .btn.ghost:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            border-top: 1px solid var(--ink);
+            margin: 4px 0 20px;
+            max-width: 62ch;
+        }
+
+        .stat {
+            padding: 12px 16px 0 0;
+        }
+
+        .stat b {
+            display: block;
+            font-size: clamp(28px, 3.4vw, 44px);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1;
+        }
+
+        .stat span {
+            display: block;
+            margin-top: 6px;
+            font-size: 13px;
+            line-height: 1.35;
+            color: var(--muted);
+        }
+
+        /* Experience and education rows */
+        .row {
+            display: grid;
+            grid-template-columns: minmax(0, 2fr) minmax(0, 7fr);
+            gap: 4px 32px;
+            padding: 24px 0;
+            border-top: 1px solid var(--rule);
+        }
+
+        .row:first-child {
+            border-top: 0;
+            padding-top: 4px;
+        }
+
+        .when {
+            font-size: 14px;
+            color: var(--muted);
+            padding-top: 6px;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .row h3 {
+            font-size: 24px;
+            line-height: 1.15;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin: 0;
+        }
+
+        .role {
+            color: var(--muted);
+            margin: 2px 0 10px;
+        }
+
+        .row p {
+            margin: 0 0 10px;
+            max-width: 62ch;
+        }
+
+        .row .points {
+            margin-bottom: 10px;
+        }
+
+        .row.compact {
+            padding: 16px 0;
+        }
+
+        .row.compact h3 {
+            font-size: 19px;
+        }
+
+        .row.compact .role {
+            margin-bottom: 0;
+        }
+
+        /* Skills */
+        .skills {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 32px;
+        }
+
+        .skills h3 {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--muted);
+            margin: 0 0 10px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .skills ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            line-height: 1.35;
+        }
+
+        /* Languages */
+        .langs {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 24px 32px;
+        }
+
+        .langs b {
+            display: block;
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        .langs span {
+            color: var(--muted);
+        }
+
+        /* Contact */
+        .big-mail {
+            display: inline-block;
+            font-size: clamp(24px, 5.6vw, 64px);
+            font-weight: 800;
+            letter-spacing: -0.035em;
+            line-height: 1.05;
+            text-decoration: none;
+            border-bottom: 3px solid var(--ink);
+            overflow-wrap: anywhere;
+        }
+
+        .big-mail:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .contact-line {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 32px;
+            margin: 28px 0 0;
+            color: var(--muted);
+        }
+
+        .contact-line a:hover {
+            color: var(--accent);
+        }
+
+        .foot {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px 24px;
+            margin-top: 128px;
+            padding-top: 16px;
+            padding-bottom: 32px;
+            border-top: 1px solid var(--ink);
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        @media (min-width: 821px) {
+            .sec-head {
+                position: sticky;
+                top: 80px;
+                align-self: start;
             }
         }
 
-        .animate-float {
-            animation: float 4s ease-in-out infinite;
+        @media (max-width: 820px) {
+
+            .hero-grid,
+            .sec {
+                grid-template-columns: 1fr;
+            }
+
+            .sec {
+                margin-top: 88px;
+            }
+
+            .sec-head p {
+                max-width: none;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .wrap {
+                padding: 0 16px;
+            }
+
+            .nav {
+                gap: 16px;
+                font-size: 13px;
+            }
+
+            .nav .opt {
+                display: none;
+            }
+
+            .hero {
+                padding-top: 48px;
+            }
+
+            .proj {
+                grid-template-columns: 32px minmax(0, 1fr);
+            }
+
+            .status {
+                grid-column: 2;
+                padding-top: 4px;
+            }
+
+            .proj-body {
+                grid-column: 1 / -1;
+            }
+
+            .row {
+                grid-template-columns: 1fr;
+            }
+
+            .when {
+                padding-top: 0;
+            }
+
+            .langs {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
         }
     </style>
 </head>
 
-<body
-    class="bg-slate-950 text-slate-100 min-h-screen overflow-x-hidden font-sans selection:bg-accent-cyan/30 selection:text-white">
-    <div class="scroll-progress" id="progressBar"></div>
-
-    <!-- Floating Navigation -->
-    <nav class="fixed top-0 left-0 right-0 z-50 glass-header px-6 py-4">
-        <div class="container mx-auto max-w-6xl flex justify-between items-center">
-            <a href="#" class="text-2xl font-display font-extrabold text-gradient">FT.</a>
-            <div class="hidden md:flex items-center gap-8">
-                <a href="#projects"
-                    class="nav-link text-sm font-medium text-slate-300 hover:text-white uppercase tracking-wider">Projets</a>
-                <a href="#experience"
-                    class="nav-link text-sm font-medium text-slate-300 hover:text-white uppercase tracking-wider">Expérience</a>
-                <a href="#skills"
-                    class="nav-link text-sm font-medium text-slate-300 hover:text-white uppercase tracking-wider">Skills</a>
-                <a href="#education"
-                    class="nav-link text-sm font-medium text-slate-300 hover:text-white uppercase tracking-wider">Formations</a>
-                <a href="mailto:fatih.turhan@outlook.fr"
-                    class="bg-gradient-accent text-white px-5 py-2 rounded-full text-sm font-bold shadow-lg shadow-accent-cyan/20 hover:scale-105 transition-transform">Contact</a>
-            </div>
-            <button class="md:hidden text-white"><i class="fas fa-bars text-xl"></i></button>
+<body>
+    <header class="top">
+        <div class="wrap">
+            <a href="#" class="brand">Fatih Turhan<span>.</span></a>
+            <nav class="nav" aria-label="Sections">
+                <a href="#projects">Projets</a>
+                <a href="#experience">Expérience</a>
+                <a href="#skills" class="opt">Compétences</a>
+                <a href="#education" class="opt">Formation</a>
+                <a href="#contact">Contact</a>
+            </nav>
         </div>
-    </nav>
+    </header>
 
-    <!-- Animated Background -->
-    <div class="fixed inset-0 -z-10 bg-slate-950">
-        <div class="absolute top-0 left-1/4 w-[500px] h-[500px] bg-accent-cyan/10 rounded-full hero-glow"></div>
-        <div class="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-accent-violet/10 rounded-full hero-glow"></div>
-        <div
-            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-[0.03] pointer-events-none">
-        </div>
-    </div>
+    <main class="wrap">
+        <!-- Hero -->
+        <section class="hero">
+            <p class="eyebrow">Expert Python &amp; Senior FullStack Engineer — Strasbourg</p>
+            <h1 class="display"><span class="sr-only">Fatih Turhan : </span>Python.<br>Backend.<br><span
+                    class="accent">IA.</span></h1>
 
-    <div class="container mx-auto max-w-5xl px-4 py-12">
-        <!-- Hero Header -->
-        <header class="pt-24 pb-16 md:pt-32 md:pb-24 flex flex-col items-center text-center" data-aos="zoom-out">
-            <div class="relative inline-block mb-8">
-                <div
-                    class="absolute inset-0 bg-gradient-accent blur-3xl opacity-20 scale-150 rounded-full animate-float">
-                </div>
-                <div
-                    class="relative w-32 h-32 md:w-40 md:h-40 bg-slate-800 rounded-3xl border border-white/10 flex items-center justify-center p-1 shadow-2xl overflow-hidden group">
-                    <img src="https://ui-avatars.com/api/?name=Fatih+Turhan&background=0f172a&color=22d3ee&size=200&bold=true"
-                        alt="Fatih Turhan"
-                        class="w-full h-full object-cover rounded-2xl group-hover:scale-110 transition-transform duration-500">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/50 to-transparent"></div>
-                </div>
-            </div>
-
-            <h1 class="text-5xl md:text-8xl font-display font-black mb-4 tracking-tighter text-gradient leading-none">
-                FATIH TURHAN
-            </h1>
-            <p class="text-xl md:text-3xl text-slate-400 font-medium mb-12 tracking-tight max-w-2xl">
-                Expert Python & <span class="text-white">Senior FullStack Engineer</span>
-            </p>
-
-            <div class="flex flex-wrap justify-center gap-4 md:gap-8 text-sm md:text-base text-slate-400 mb-12">
-                <a href="mailto:fatih.turhan@outlook.fr"
-                    class="flex items-center gap-2 px-4 py-2 glass rounded-full hover:text-accent-cyan transition-all group">
-                    <i class="fas fa-envelope text-accent-cyan group-hover:scale-110 transition-transform"></i>
-                    fatih.turhan@outlook.fr
-                </a>
-                <div class="flex items-center gap-2 px-4 py-2 glass rounded-full">
-                    <i class="fas fa-phone text-accent-cyan"></i>
-                    06.36.84.57.38
-                </div>
-                <div class="flex items-center gap-2 px-4 py-2 glass rounded-full">
-                    <i class="fas fa-location-dot text-accent-cyan"></i>
-                    Strasbourg
-                </div>
-                <a href="https://linkedin.com/in/fatih-turhan" target="_blank"
-                    class="flex items-center gap-2 px-4 py-2 glass rounded-full hover:text-accent-cyan transition-all group">
-                    <i class="fab fa-linkedin text-accent-cyan group-hover:scale-110 transition-transform"></i>
-                    LinkedIn
-                </a>
-            </div>
-
-            <a href="#projects" class="animate-bounce" aria-label="Voir les projets">
-                <i class="fas fa-chevron-down text-slate-600 text-2xl"></i>
-            </a>
-        </header>
-
-        <!-- Professional Summary -->
-        <section class="mb-32 max-w-4xl mx-auto" data-aos="fade-up">
-            <div class="glass relative overflow-hidden rounded-3xl p-8 md:p-12 shadow-2xl">
-                <div class="absolute top-0 left-0 w-2 h-full bg-gradient-accent"></div>
-                <div class="flex flex-col md:flex-row gap-8 items-center">
-                    <div class="flex-shrink-0 text-5xl text-accent-cyan opacity-20">
-                        <i class="fas fa-quote-left"></i>
-                    </div>
-                    <p class="text-xl md:text-2xl leading-relaxed text-slate-200 font-light">
-                        Expert <span class="font-bold text-white">Python</span> passionné par la performance et
-                        l’industrialisation des services backend. Fort de plus de <span
-                            class="text-accent-cyan font-bold underline decoration-accent-violet decoration-2 underline-offset-4">10
-                            ans d’expérience</span>, j’interviens sur des projets à fort impact — de la conception
-                        d’architectures robustes à la mise en production CI/CD.
-                    </p>
-                </div>
+            <div class="hero-grid">
+                <p class="lead">
+                    Expert Python passionné par la performance et l’industrialisation des services backend. Fort de
+                    plus de 10 ans d’expérience, j’interviens sur des projets à fort impact — de la conception
+                    d’architectures robustes à la mise en production CI/CD.
+                </p>
+                <dl class="contact">
+                    <dt>Email</dt>
+                    <dd><a href="mailto:fatih.turhan@outlook.fr">fatih.turhan@outlook.fr</a></dd>
+                    <dt>Téléphone</dt>
+                    <dd><a href="tel:+33636845738">06.36.84.57.38</a></dd>
+                    <dt>Basé à</dt>
+                    <dd>Strasbourg</dd>
+                    <dt>LinkedIn</dt>
+                    <dd><a href="https://linkedin.com/in/fatih-turhan" target="_blank" rel="noopener">in/fatih-turhan
+                            ↗</a></dd>
+                </dl>
             </div>
         </section>
 
         <!-- Current Projects -->
-        <section id="projects" class="mb-32 scroll-mt-28">
-            <h2 class="text-3xl font-display font-black tracking-tighter text-white mb-4 flex items-center gap-4"
-                data-aos="fade-right">
-                <span class="w-12 h-1 bg-gradient-accent rounded-full"></span>
-                PROJETS EN COURS
-            </h2>
-            <p class="text-slate-400 mb-12 max-w-2xl" data-aos="fade-right">
-                Ce sur quoi je travaille aujourd'hui, de la conception à la mise en production.
-            </p>
+        <section id="projects" class="sec">
+            <div class="sec-head">
+                <span class="n">01</span>
+                <h2>Projets en cours</h2>
+                <p>Ce sur quoi je travaille aujourd'hui, de la conception à la mise en production.</p>
+            </div>
 
-            <div class="grid md:grid-cols-2 gap-6">
-                <!-- Ecoroulez (featured) -->
-                <article class="md:col-span-2 glass card-hover rounded-3xl p-8 shadow-xl overflow-hidden group relative"
-                    data-aos="fade-up">
-                    <div
-                        class="absolute top-0 right-0 w-48 h-48 bg-accent-emerald/10 -mr-24 -mt-24 rounded-full blur-3xl group-hover:bg-accent-emerald/20 transition-colors">
+            <div>
+                <!-- Ecoroulez -->
+                <article class="proj">
+                    <span class="idx">01</span>
+                    <div>
+                        <h3>Ecoroulez</h3>
+                        <p class="sub">Le carburant le moins cher autour de vous</p>
                     </div>
-                    <div class="flex flex-wrap items-start justify-between gap-4 mb-6">
-                        <div class="flex items-center gap-4">
-                            <div
-                                class="w-14 h-14 flex-shrink-0 rounded-2xl bg-accent-emerald/10 border border-accent-emerald/20 flex items-center justify-center">
-                                <i class="fas fa-gas-pump text-2xl text-accent-emerald"></i>
-                            </div>
-                            <div>
-                                <h3
-                                    class="text-2xl font-display font-bold text-white group-hover:text-accent-emerald transition-colors">
-                                    Ecoroulez</h3>
-                                <p class="text-slate-400 text-sm">Le carburant le moins cher autour de vous</p>
-                            </div>
+                    <span class="status live">En ligne</span>
+                    <div class="proj-body">
+                        <p>Application mobile et site web qui trouvent les stations-service les moins chères autour
+                            de soi, à partir des données ouvertes officielles : France, Espagne et Allemagne.</p>
+                        <div class="stats">
+                            <div class="stat"><b>15 min</b><span>entre deux mises à jour des prix</span></div>
+                            <div class="stat"><b>3 pays</b><span>couverts par des sources officielles</span></div>
+                            <div class="stat"><b>5 ans</b><span>d'historique des prix par station</span></div>
                         </div>
-                        <span
-                            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-emerald/10 border border-accent-emerald/20 text-accent-emerald text-xs font-bold uppercase tracking-wider">
-                            <span class="w-2 h-2 rounded-full bg-accent-emerald animate-pulse"></span>En ligne
-                        </span>
-                    </div>
-
-                    <div class="grid md:grid-cols-5 gap-8">
-                        <div class="md:col-span-3">
-                            <p class="text-slate-300 mb-6 leading-relaxed">
-                                Application mobile et site web qui trouvent les stations-service les moins chères autour
-                                de soi, à partir des données ouvertes officielles : France, Espagne et Allemagne.
-                            </p>
-                            <ul class="space-y-3 text-slate-300 text-sm">
-                                <li class="flex items-start gap-3"><i
-                                        class="fas fa-check-circle text-accent-emerald mt-1"></i>
-                                    Ingestion des flux officiels de prix et historique des changements sur 5 ans</li>
-                                <li class="flex items-start gap-3"><i
-                                        class="fas fa-check-circle text-accent-emerald mt-1"></i>
-                                    Recherche géographique PostGIS : stations triées par prix puis distance</li>
-                                <li class="flex items-start gap-3"><i
-                                        class="fas fa-check-circle text-accent-emerald mt-1"></i>
-                                    Pages par département, ville et station rendues côté serveur pour le référencement</li>
-                                <li class="flex items-start gap-3"><i
-                                        class="fas fa-check-circle text-accent-emerald mt-1"></i>
-                                    Une seule base de code Expo pour le web et le mobile, carte MapLibre</li>
-                            </ul>
-                        </div>
-                        <div class="md:col-span-2 grid grid-cols-1 sm:grid-cols-3 md:grid-cols-1 gap-3 content-start">
-                            <div class="bg-slate-900/60 rounded-2xl border border-white/5 px-4 py-3 flex items-baseline gap-3 sm:block">
-                                <span class="sm:block text-2xl font-display font-black text-white whitespace-nowrap">15 min</span>
-                                <span class="text-xs text-slate-400">entre deux mises à jour des prix</span>
-                            </div>
-                            <div class="bg-slate-900/60 rounded-2xl border border-white/5 px-4 py-3 flex items-baseline gap-3 sm:block">
-                                <span class="sm:block text-2xl font-display font-black text-white whitespace-nowrap">3 pays</span>
-                                <span class="text-xs text-slate-400">couverts par des sources officielles</span>
-                            </div>
-                            <div class="bg-slate-900/60 rounded-2xl border border-white/5 px-4 py-3 flex items-baseline gap-3 sm:block">
-                                <span class="sm:block text-2xl font-display font-black text-white whitespace-nowrap">5 ans</span>
-                                <span class="text-xs text-slate-400">d'historique des prix par station</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="flex flex-wrap items-center justify-between gap-4 mt-8">
-                        <div class="flex flex-wrap gap-2">
-                            <span
-                                class="px-3 py-1 bg-white/5 rounded-lg text-[10px] font-mono text-slate-400 uppercase tracking-widest">FastAPI</span>
-                            <span
-                                class="px-3 py-1 bg-white/5 rounded-lg text-[10px] font-mono text-slate-400 uppercase tracking-widest">PostGIS</span>
-                            <span
-                                class="px-3 py-1 bg-white/5 rounded-lg text-[10px] font-mono text-slate-400 uppercase tracking-widest">Expo</span>
-                            <span
-                                class="px-3 py-1 bg-white/5 rounded-lg text-[10px] font-mono text-slate-400 uppercase tracking-widest">React Native</span>
-                            <span
-                                class="px-3 py-1 bg-white/5 rounded-lg text-[10px] font-mono text-slate-400 uppercase tracking-widest">MapLibre</span>
-                            <span
-                                class="px-3 py-1 bg-white/5 rounded-lg text-[10px] font-mono text-slate-400 uppercase tracking-widest">Docker</span>
-                            <span
-                                class="px-3 py-1 bg-white/5 rounded-lg text-[10px] font-mono text-slate-400 uppercase tracking-widest">OVHcloud</span>
-                        </div>
-                        <div class="flex flex-wrap gap-3">
-                            <a href="https://ecoroulez.fatihturhan.dev/prix-carburant" target="_blank" rel="noopener"
-                                class="px-4 py-2 glass rounded-full text-sm text-slate-300 hover:text-accent-emerald transition-colors">
-                                Prix par ville
-                            </a>
-                            <a href="https://ecoroulez.fatihturhan.dev" target="_blank" rel="noopener"
-                                class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold text-slate-950 bg-accent-emerald hover:scale-105 transition-transform">
-                                Voir le site <i class="fas fa-arrow-up-right-from-square text-xs"></i>
-                            </a>
+                        <ul class="points">
+                            <li>Ingestion des flux officiels de prix et historique des changements sur 5 ans</li>
+                            <li>Recherche géographique PostGIS : stations triées par prix puis distance</li>
+                            <li>Pages par département, ville et station rendues côté serveur pour le référencement</li>
+                            <li>Une seule base de code Expo pour le web et le mobile, carte MapLibre</li>
+                        </ul>
+                        <p class="stack">FastAPI · PostGIS · Expo · React Native · MapLibre · Docker · OVHcloud</p>
+                        <div class="links">
+                            <a class="btn" href="https://ecoroulez.fatihturhan.dev" target="_blank"
+                                rel="noopener">Voir le site ↗</a>
+                            <a class="btn ghost" href="https://ecoroulez.fatihturhan.dev/prix-carburant"
+                                target="_blank" rel="noopener">Prix par ville ↗</a>
                         </div>
                     </div>
                 </article>
 
                 <!-- PoliScope -->
-                <article class="glass card-hover rounded-3xl p-8 shadow-xl overflow-hidden group relative flex flex-col"
-                    data-aos="fade-up">
-                    <div class="flex flex-wrap items-start justify-between gap-4 mb-6">
-                        <div class="flex items-center gap-4">
-                            <div
-                                class="w-14 h-14 flex-shrink-0 rounded-2xl bg-accent-violet/10 border border-accent-violet/20 flex items-center justify-center">
-                                <i class="fas fa-landmark text-2xl text-accent-violet"></i>
-                            </div>
-                            <div>
-                                <h3
-                                    class="text-2xl font-display font-bold text-white group-hover:text-accent-violet transition-colors">
-                                    PoliScope</h3>
-                                <p class="text-slate-400 text-sm">La politique par les faits</p>
-                            </div>
-                        </div>
-                        <span
-                            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-cyan/10 border border-accent-cyan/20 text-accent-cyan text-xs font-bold uppercase tracking-wider">
-                            <span class="w-2 h-2 rounded-full bg-accent-cyan"></span>En développement
-                        </span>
+                <article class="proj">
+                    <span class="idx">02</span>
+                    <div>
+                        <h3>PoliScope</h3>
+                        <p class="sub">La politique par les faits</p>
                     </div>
-                    <p class="text-slate-300 mb-6 leading-relaxed">
-                        Assistant conversationnel pour interroger les votes, mandats, déclarations et programmes des
-                        candidats à la présidentielle 2027, avec une source vérifiable pour chaque affirmation.
-                    </p>
-                    <ul class="space-y-3 mb-8 text-slate-300 text-sm">
-                        <li class="flex items-start gap-3"><i class="fas fa-check-circle text-accent-violet mt-1"></i>
-                            Import des données ouvertes de l'Assemblée nationale et du Sénat : scrutins, votes,
-                            amendements</li>
-                        <li class="flex items-start gap-3"><i class="fas fa-check-circle text-accent-violet mt-1"></i>
-                            Chatbot RAG qui vérifie ses citations et refuse toute recommandation de vote</li>
-                        <li class="flex items-start gap-3"><i class="fas fa-check-circle text-accent-violet mt-1"></i>
-                            Back-office éditorial, banc d'évaluation et 135 tests automatisés</li>
-                    </ul>
-                    <div class="flex flex-wrap gap-2 mt-auto">
-                        <span
-                            class="px-3 py-1 bg-white/5 rounded-lg text-[10px] font-mono text-slate-400 uppercase tracking-widest">FastAPI</span>
-                        <span
-                            class="px-3 py-1 bg-white/5 rounded-lg text-[10px] font-mono text-slate-400 uppercase tracking-widest">pgvector</span>
-                        <span
-                            class="px-3 py-1 bg-white/5 rounded-lg text-[10px] font-mono text-slate-400 uppercase tracking-widest">RAG</span>
-                        <span
-                            class="px-3 py-1 bg-white/5 rounded-lg text-[10px] font-mono text-slate-400 uppercase tracking-widest">Chainlit</span>
-                        <span
-                            class="px-3 py-1 bg-white/5 rounded-lg text-[10px] font-mono text-slate-400 uppercase tracking-widest">Celery</span>
+                    <span class="status">En développement</span>
+                    <div class="proj-body">
+                        <p>Assistant conversationnel pour interroger les votes, mandats, déclarations et programmes
+                            des candidats à la présidentielle 2027, avec une source vérifiable pour chaque
+                            affirmation.</p>
+                        <ul class="points">
+                            <li>Import des données ouvertes de l'Assemblée nationale et du Sénat : scrutins, votes,
+                                amendements</li>
+                            <li>Chatbot RAG qui vérifie ses citations et refuse toute recommandation de vote</li>
+                            <li>Back-office éditorial, banc d'évaluation et 135 tests automatisés</li>
+                        </ul>
+                        <p class="stack">FastAPI · PostgreSQL / pgvector · RAG · Chainlit · Celery</p>
                     </div>
                 </article>
 
                 <!-- Vocalist / audio_agent -->
-                <article class="glass card-hover rounded-3xl p-8 shadow-xl overflow-hidden group relative flex flex-col"
-                    data-aos="fade-up" data-aos-delay="100">
-                    <div class="flex flex-wrap items-start justify-between gap-4 mb-6">
-                        <div class="flex items-center gap-4">
-                            <div
-                                class="w-14 h-14 flex-shrink-0 rounded-2xl bg-accent-cyan/10 border border-accent-cyan/20 flex items-center justify-center">
-                                <i class="fas fa-phone-volume text-2xl text-accent-cyan"></i>
-                            </div>
-                            <div>
-                                <h3
-                                    class="text-2xl font-display font-bold text-white group-hover:text-accent-cyan transition-colors">
-                                    Vocalist</h3>
-                                <p class="text-slate-400 text-sm">Agent vocal IA (audio_agent)</p>
-                            </div>
-                        </div>
-                        <span
-                            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-violet/10 border border-accent-violet/20 text-accent-violet text-xs font-bold uppercase tracking-wider">
-                            <span class="w-2 h-2 rounded-full bg-accent-violet"></span>Prototype
-                        </span>
+                <article class="proj">
+                    <span class="idx">03</span>
+                    <div>
+                        <h3>Vocalist</h3>
+                        <p class="sub">Agent vocal IA (audio_agent)</p>
                     </div>
-                    <p class="text-slate-300 mb-6 leading-relaxed">
-                        Un agent IA décroche quand on ne peut pas répondre, converse en temps réel en français ou en
-                        anglais, puis rédige un résumé de l'appel et l'action à mener. Conçu en SaaS multi-clients.
-                    </p>
-                    <ul class="space-y-3 mb-8 text-slate-300 text-sm">
-                        <li class="flex items-start gap-3"><i class="fas fa-check-circle text-accent-cyan mt-1"></i>
-                            Téléphonie Asterisk sur trunk SIP OVH, flux audio bidirectionnel</li>
-                        <li class="flex items-start gap-3"><i class="fas fa-check-circle text-accent-cyan mt-1"></i>
-                            Voix et compréhension avec Mistral (Voxtral), sans conserver l'audio brut</li>
-                        <li class="flex items-start gap-3"><i class="fas fa-check-circle text-accent-cyan mt-1"></i>
-                            Softphone mobile (SIP/WebRTC, CallKit), tableau de bord web et extension Chrome</li>
-                    </ul>
-                    <div class="flex flex-wrap gap-2 mt-auto">
-                        <span
-                            class="px-3 py-1 bg-white/5 rounded-lg text-[10px] font-mono text-slate-400 uppercase tracking-widest">FastAPI</span>
-                        <span
-                            class="px-3 py-1 bg-white/5 rounded-lg text-[10px] font-mono text-slate-400 uppercase tracking-widest">Asterisk</span>
-                        <span
-                            class="px-3 py-1 bg-white/5 rounded-lg text-[10px] font-mono text-slate-400 uppercase tracking-widest">Mistral AI</span>
-                        <span
-                            class="px-3 py-1 bg-white/5 rounded-lg text-[10px] font-mono text-slate-400 uppercase tracking-widest">WebRTC</span>
-                        <span
-                            class="px-3 py-1 bg-white/5 rounded-lg text-[10px] font-mono text-slate-400 uppercase tracking-widest">Next.js</span>
-                        <span
-                            class="px-3 py-1 bg-white/5 rounded-lg text-[10px] font-mono text-slate-400 uppercase tracking-widest">React Native</span>
+                    <span class="status">Prototype</span>
+                    <div class="proj-body">
+                        <p>Un agent IA décroche quand on ne peut pas répondre, converse en temps réel en français ou
+                            en anglais, puis rédige un résumé de l'appel et l'action à mener. Conçu en SaaS
+                            multi-clients.</p>
+                        <ul class="points">
+                            <li>Téléphonie Asterisk sur trunk SIP OVH, flux audio bidirectionnel</li>
+                            <li>Voix et compréhension avec Mistral (Voxtral), sans conserver l'audio brut</li>
+                            <li>Softphone mobile (SIP/WebRTC, CallKit), tableau de bord web et extension Chrome</li>
+                        </ul>
+                        <p class="stack">FastAPI · Asterisk · Mistral AI · WebRTC · Next.js · React Native</p>
                     </div>
                 </article>
 
                 <!-- Filterable -->
-                <article class="glass card-hover rounded-3xl p-8 shadow-xl overflow-hidden group relative flex flex-col"
-                    data-aos="fade-up">
-                    <div class="flex flex-wrap items-start justify-between gap-4 mb-6">
-                        <div class="flex items-center gap-4">
-                            <div
-                                class="w-14 h-14 flex-shrink-0 rounded-2xl bg-accent-cyan/10 border border-accent-cyan/20 flex items-center justify-center">
-                                <i class="fas fa-filter text-2xl text-accent-cyan"></i>
-                            </div>
-                            <div>
-                                <h3
-                                    class="text-2xl font-display font-bold text-white group-hover:text-accent-cyan transition-colors">
-                                    Filterable</h3>
-                                <p class="text-slate-400 text-sm">Extension Chrome pour LinkedIn</p>
-                            </div>
-                        </div>
-                        <span
-                            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-emerald/10 border border-accent-emerald/20 text-accent-emerald text-xs font-bold uppercase tracking-wider">
-                            <span class="w-2 h-2 rounded-full bg-accent-emerald"></span>En usage
-                        </span>
+                <article class="proj">
+                    <span class="idx">04</span>
+                    <div>
+                        <h3>Filterable</h3>
+                        <p class="sub">Extension Chrome pour LinkedIn</p>
                     </div>
-                    <p class="text-slate-300 mb-6 leading-relaxed">
-                        Filtre le fil LinkedIn pour ne garder que les posts qui correspondent à mes mots-clés, et
-                        prépare une candidature personnalisée en un clic.
-                    </p>
-                    <ul class="space-y-3 mb-8 text-slate-300 text-sm">
-                        <li class="flex items-start gap-3"><i class="fas fa-check-circle text-accent-cyan mt-1"></i>
-                            Posts hors sujet grisés et repliés, dépliables au cas par cas</li>
-                        <li class="flex items-start gap-3"><i class="fas fa-check-circle text-accent-cyan mt-1"></i>
-                            « Postuler par email » : lettre rédigée par Claude, brouillon Outlook pré-rempli</li>
-                        <li class="flex items-start gap-3"><i class="fas fa-check-circle text-accent-cyan mt-1"></i>
-                            Serveur IA local uniquement, piloté depuis une icône système</li>
-                    </ul>
-                    <div class="flex flex-wrap gap-2 mt-auto">
-                        <span
-                            class="px-3 py-1 bg-white/5 rounded-lg text-[10px] font-mono text-slate-400 uppercase tracking-widest">Chrome MV3</span>
-                        <span
-                            class="px-3 py-1 bg-white/5 rounded-lg text-[10px] font-mono text-slate-400 uppercase tracking-widest">JavaScript</span>
-                        <span
-                            class="px-3 py-1 bg-white/5 rounded-lg text-[10px] font-mono text-slate-400 uppercase tracking-widest">Node.js</span>
-                        <span
-                            class="px-3 py-1 bg-white/5 rounded-lg text-[10px] font-mono text-slate-400 uppercase tracking-widest">Claude Code</span>
+                    <span class="status">En usage</span>
+                    <div class="proj-body">
+                        <p>Filtre le fil LinkedIn pour ne garder que les posts qui correspondent à mes mots-clés, et
+                            prépare une candidature personnalisée en un clic.</p>
+                        <ul class="points">
+                            <li>Posts hors sujet grisés et repliés, dépliables au cas par cas</li>
+                            <li>« Postuler par email » : lettre rédigée par Claude, brouillon Outlook pré-rempli</li>
+                            <li>Serveur IA local uniquement, piloté depuis une icône système</li>
+                        </ul>
+                        <p class="stack">Chrome MV3 · JavaScript · Node.js · Claude Code</p>
                     </div>
                 </article>
 
                 <!-- Suivi leads -->
-                <article class="glass card-hover rounded-3xl p-8 shadow-xl overflow-hidden group relative flex flex-col"
-                    data-aos="fade-up" data-aos-delay="100">
-                    <div class="flex flex-wrap items-start justify-between gap-4 mb-6">
-                        <div class="flex items-center gap-4">
-                            <div
-                                class="w-14 h-14 flex-shrink-0 rounded-2xl bg-amber-400/10 border border-amber-400/20 flex items-center justify-center">
-                                <i class="fas fa-people-arrows text-2xl text-amber-300"></i>
-                            </div>
-                            <div>
-                                <h3
-                                    class="text-2xl font-display font-bold text-white group-hover:text-amber-300 transition-colors">
-                                    Suivi leads</h3>
-                                <p class="text-slate-400 text-sm">Le suivi des échanges avec les recruteurs</p>
-                            </div>
-                        </div>
-                        <span
-                            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/20 text-amber-300 text-xs font-bold uppercase tracking-wider">
-                            <span class="w-2 h-2 rounded-full bg-amber-300"></span>En conception
-                        </span>
+                <article class="proj">
+                    <span class="idx">05</span>
+                    <div>
+                        <h3>Suivi leads</h3>
+                        <p class="sub">Le suivi des échanges avec les recruteurs</p>
                     </div>
-                    <p class="text-slate-300 mb-6 leading-relaxed">
-                        Un espace qui réunit mails, candidatures et appels avec chaque recruteur, interrogé en langage
-                        naturel : « Qui dois-je relancer cette semaine ? »
-                    </p>
-                    <ul class="space-y-3 mb-8 text-slate-300 text-sm">
-                        <li class="flex items-start gap-3"><i class="fas fa-check-circle text-amber-300 mt-1"></i>
-                            Serveur MCP distant : Claude sert d'interface, le serveur garde la mémoire</li>
-                        <li class="flex items-start gap-3"><i class="fas fa-check-circle text-amber-300 mt-1"></i>
-                            Contacts, entreprises et postes rapprochés d'une source à l'autre</li>
-                        <li class="flex items-start gap-3"><i class="fas fa-check-circle text-amber-300 mt-1"></i>
-                            Relances proposées et rédigées à partir de l'historique des échanges</li>
-                    </ul>
-                    <div class="flex flex-wrap items-center gap-2 mt-auto">
-                        <span class="text-xs text-slate-500 mr-1">Alimenté par</span>
-                        <span
-                            class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg border border-white/10 text-xs text-slate-300"><i
-                                class="fas fa-filter text-accent-cyan text-[10px]"></i>Filterable</span>
-                        <span
-                            class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg border border-white/10 text-xs text-slate-300"><i
-                                class="fas fa-phone-volume text-accent-cyan text-[10px]"></i>Vocalist</span>
-                        <span
-                            class="px-3 py-1 bg-white/5 rounded-lg text-[10px] font-mono text-slate-400 uppercase tracking-widest">MCP</span>
+                    <span class="status">En conception</span>
+                    <div class="proj-body">
+                        <p>Un espace qui réunit mails, candidatures et appels avec chaque recruteur, interrogé en
+                            langage naturel : « Qui dois-je relancer cette semaine ? »</p>
+                        <ul class="points">
+                            <li>Serveur MCP distant : Claude sert d'interface, le serveur garde la mémoire</li>
+                            <li>Contacts, entreprises et postes rapprochés d'une source à l'autre</li>
+                            <li>Relances proposées et rédigées à partir de l'historique des échanges</li>
+                        </ul>
+                        <p class="stack">MCP · alimenté par Filterable (candidatures) et Vocalist (appels)</p>
                     </div>
                 </article>
             </div>
         </section>
 
         <!-- Professional Experience -->
-        <section id="experience" class="mb-32 relative scroll-mt-28">
-            <h2 class="text-3xl font-display font-black tracking-tighter text-white mb-16 flex items-center gap-4"
-                data-aos="fade-right">
-                <span class="w-12 h-1 bg-gradient-accent rounded-full"></span>
-                EXPÉRIENCES
-            </h2>
+        <section id="experience" class="sec">
+            <div class="sec-head">
+                <span class="n">02</span>
+                <h2>Expérience</h2>
+                <p>Plus de 10 ans de missions, du POC à la production.</p>
+            </div>
 
-            <div class="relative ml-4 md:ml-8 border-l border-white/10 space-y-12 pb-8">
-                <!-- Guiild / Jiliti -->
-                <div class="timeline-item pl-8 relative" data-aos="fade-up">
-                    <div class="glass card-hover rounded-3xl p-8 shadow-xl overflow-hidden group">
-                        <div
-                            class="absolute top-0 right-0 w-32 h-32 bg-accent-cyan/5 -mr-16 -mt-16 rounded-full blur-2xl group-hover:bg-accent-cyan/10 transition-colors">
-                        </div>
-
-                        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
-                            <div>
-                                <h3
-                                    class="text-2xl font-display font-bold text-white group-hover:text-accent-cyan transition-colors">
-                                    Guiild / Jiliti</h3>
-                                <p class="text-accent-cyan font-bold tracking-wide uppercase text-xs mt-1">Senior
-                                    Développeur Python / Django</p>
-                            </div>
-                            <span
-                                class="px-4 py-1.5 bg-slate-900/80 rounded-full border border-white/5 text-slate-400 text-sm font-semibold whitespace-nowrap">
-                                Mars 2024 – Présent
-                            </span>
-                        </div>
-
-                        <p class="text-slate-400 mb-6 leading-relaxed">
-                            Mission Python/Django chez Jiliti en tant que Développeur Senior. Création d'un nouvel outil
-                            interne permettant la gestion des devis, des contrats, de la sous-traitance, des projets et
-                            des factures.
-                        </p>
-
-                        <ul class="grid md:grid-cols-2 gap-3 mb-8 text-slate-300 text-sm">
-                            <li class="flex items-start gap-3"><i class="fas fa-check-circle text-accent-cyan mt-1"></i>
-                                Optimisation des templates front/web</li>
-                            <li class="flex items-start gap-3"><i class="fas fa-check-circle text-accent-cyan mt-1"></i>
-                                Développement Django (modèles, serializers, views)</li>
-                            <li class="flex items-start gap-3"><i class="fas fa-check-circle text-accent-cyan mt-1"></i>
-                                Maintenance et refactoring code legacy</li>
-                            <li class="flex items-start gap-3"><i class="fas fa-check-circle text-accent-cyan mt-1"></i>
-                                Sécurité applicative et optimisation SQL</li>
+            <div>
+                <article class="row">
+                    <span class="when">Mars 2024 – Présent</span>
+                    <div>
+                        <h3>Guiild / Jiliti</h3>
+                        <p class="role">Senior Développeur Python / Django</p>
+                        <p>Mission Python/Django chez Jiliti en tant que Développeur Senior. Création d'un nouvel outil
+                            interne permettant la gestion des devis, des contrats, de la sous-traitance, des projets
+                            et des factures.</p>
+                        <ul class="points">
+                            <li>Optimisation des templates front/web</li>
+                            <li>Développement Django (modèles, serializers, views)</li>
+                            <li>Maintenance et refactoring code legacy</li>
+                            <li>Sécurité applicative et optimisation SQL</li>
                         </ul>
-
-                        <div class="flex flex-wrap gap-2">
-                            <span
-                                class="px-3 py-1 bg-white/5 rounded-lg text-[10px] font-mono text-slate-400 uppercase tracking-widest">Python</span>
-                            <span
-                                class="px-3 py-1 bg-white/5 rounded-lg text-[10px] font-mono text-slate-400 uppercase tracking-widest">Django</span>
-                            <span
-                                class="px-3 py-1 bg-white/5 rounded-lg text-[10px] font-mono text-slate-400 uppercase tracking-widest">PostgreSQL</span>
-                            <span
-                                class="px-3 py-1 bg-white/5 rounded-lg text-[10px] font-mono text-slate-400 uppercase tracking-widest">Linux</span>
-                        </div>
+                        <p class="stack">Python · Django · PostgreSQL · Linux</p>
                     </div>
-                </div>
+                </article>
 
-                <!-- Jumbo Mana -->
-                <div class="timeline-item pl-8 relative" data-aos="fade-up">
-                    <div class="glass card-hover rounded-3xl p-8 shadow-xl overflow-hidden group">
-                        <div
-                            class="absolute top-0 right-0 w-32 h-32 bg-accent-violet/5 -mr-16 -mt-16 rounded-full blur-2xl group-hover:bg-accent-violet/10 transition-colors">
-                        </div>
-
-                        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
-                            <div>
-                                <h3
-                                    class="text-2xl font-display font-bold text-white group-hover:text-accent-violet transition-colors">
-                                    Jumbo Mana</h3>
-                                <p class="text-accent-violet font-bold tracking-wide uppercase text-xs mt-1">DevOps
-                                    Python</p>
-                            </div>
-                            <span
-                                class="px-4 py-1.5 bg-slate-900/80 rounded-full border border-white/5 text-slate-400 text-sm font-semibold whitespace-nowrap">
-                                Oct. 2023 – Fév. 2024
-                            </span>
-                        </div>
-
-                        <p class="text-slate-400 mb-6 leading-relaxed">
-                            Intervention sur divers projets IA : Chatbot, Voice generation, LipSyncing. Mise en place
-                            d'architectures robustes pour des services à haute performance.
-                        </p>
-
-                        <ul class="grid md:grid-cols-2 gap-3 mb-8 text-slate-300 text-sm">
-                            <li class="flex items-start gap-3"><i class="fas fa-terminal text-accent-violet mt-1"></i>
-                                Architecture serveur & DB</li>
-                            <li class="flex items-start gap-3"><i class="fas fa-terminal text-accent-violet mt-1"></i>
-                                Pipeline CI/CD & Monitoring</li>
-                            <li class="flex items-start gap-3"><i class="fas fa-terminal text-accent-violet mt-1"></i>
-                                K8s & Docker Orchestration</li>
-                            <li class="flex items-start gap-3"><i class="fas fa-terminal text-accent-violet mt-1"></i>
-                                Skills Amazon Echo / AI API</li>
+                <article class="row">
+                    <span class="when">Oct. 2023 – Fév. 2024</span>
+                    <div>
+                        <h3>Jumbo Mana</h3>
+                        <p class="role">DevOps Python</p>
+                        <p>Intervention sur divers projets IA : Chatbot, Voice generation, LipSyncing. Mise en place
+                            d'architectures robustes pour des services à haute performance.</p>
+                        <ul class="points">
+                            <li>Architecture serveur &amp; DB</li>
+                            <li>Pipeline CI/CD &amp; Monitoring</li>
+                            <li>K8s &amp; Docker Orchestration</li>
+                            <li>Skills Amazon Echo / AI API</li>
                         </ul>
-
-                        <div class="flex flex-wrap gap-2">
-                            <span
-                                class="px-3 py-1 bg-white/5 rounded-lg text-[10px] font-mono text-slate-400 uppercase tracking-widest">Flask</span>
-                            <span
-                                class="px-3 py-1 bg-white/5 rounded-lg text-[10px] font-mono text-slate-400 uppercase tracking-widest">Kubernetes</span>
-                            <span
-                                class="px-3 py-1 bg-white/5 rounded-lg text-[10px] font-mono text-slate-400 uppercase tracking-widest">Docker</span>
-                            <span
-                                class="px-3 py-1 bg-white/5 rounded-lg text-[10px] font-mono text-slate-400 uppercase tracking-widest">AWS</span>
-                        </div>
+                        <p class="stack">Flask · Kubernetes · Docker · AWS</p>
                     </div>
-                </div>
+                </article>
 
-                <!-- Freelance Senior Web Developer -->
-                <div class="timeline-item pl-8 relative" data-aos="fade-up">
-                    <div class="glass card-hover rounded-3xl p-8 shadow-xl overflow-hidden group">
-                        <div
-                            class="absolute top-0 right-0 w-32 h-32 bg-accent-emerald/5 -mr-16 -mt-16 rounded-full blur-2xl group-hover:bg-accent-emerald/10 transition-colors">
-                        </div>
-
-                        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
-                            <div>
-                                <h3
-                                    class="text-2xl font-display font-bold text-white group-hover:text-accent-emerald transition-colors">
-                                    Freelance</h3>
-                                <p class="text-accent-emerald font-bold tracking-wide uppercase text-xs mt-1">Senior Web
-                                    Developer</p>
-                            </div>
-                            <span
-                                class="px-4 py-1.5 bg-slate-900/80 rounded-full border border-white/5 text-slate-400 text-sm font-semibold whitespace-nowrap">
-                                Jan. 2023 – Oct. 2023
-                            </span>
-                        </div>
-
-                        <p class="text-slate-400 mb-6 leading-relaxed italic">
-                            Missions full-stack : création d'API, front-end, optimisation et déploiement.
-                        </p>
-
-                        <ul class="grid md:grid-cols-2 gap-3 mb-8 text-slate-300 text-sm">
-                            <li class="flex items-start gap-3"><i
-                                    class="fas fa-code-branch text-accent-emerald mt-1"></i> Django REST Framework & JWT
-                            </li>
-                            <li class="flex items-start gap-3"><i
-                                    class="fas fa-code-branch text-accent-emerald mt-1"></i> Angular Material apps</li>
-                            <li class="flex items-start gap-3"><i
-                                    class="fas fa-code-branch text-accent-emerald mt-1"></i> Lazy loading & Optimization
-                            </li>
-                            <li class="flex items-start gap-3"><i
-                                    class="fas fa-code-branch text-accent-emerald mt-1"></i> Flutter Mobile development
-                            </li>
+                <article class="row">
+                    <span class="when">Jan. 2023 – Oct. 2023</span>
+                    <div>
+                        <h3>Freelance</h3>
+                        <p class="role">Senior Web Developer</p>
+                        <p>Missions full-stack : création d'API, front-end, optimisation et déploiement.</p>
+                        <ul class="points">
+                            <li>Django REST Framework &amp; JWT</li>
+                            <li>Angular Material apps</li>
+                            <li>Lazy loading &amp; Optimization</li>
+                            <li>Flutter Mobile development</li>
                         </ul>
-
-                        <div class="flex flex-wrap gap-2">
-                            <span
-                                class="px-3 py-1 bg-white/5 rounded-lg text-[10px] font-mono text-slate-400 uppercase tracking-widest">Angular</span>
-                            <span
-                                class="px-3 py-1 bg-white/5 rounded-lg text-[10px] font-mono text-slate-400 uppercase tracking-widest">DRF</span>
-                            <span
-                                class="px-3 py-1 bg-white/5 rounded-lg text-[10px] font-mono text-slate-400 uppercase tracking-widest">Flutter</span>
-                            <span
-                                class="px-3 py-1 bg-white/5 rounded-lg text-[10px] font-mono text-slate-400 uppercase tracking-widest">Docker</span>
-                        </div>
+                        <p class="stack">Angular · DRF · Flutter · Docker</p>
                     </div>
-                </div>
+                </article>
 
-                <!-- Indépendant POC FullStack -->
-                <div class="timeline-item pl-8 relative" data-aos="fade-up">
-                    <div class="glass card-hover rounded-3xl p-8 shadow-xl overflow-hidden group">
-                        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
-                            <div>
-                                <h3
-                                    class="text-2xl font-display font-bold text-white group-hover:text-accent-cyan transition-colors">
-                                    Indépendant</h3>
-                                <p class="text-accent-cyan font-bold tracking-wide uppercase text-xs mt-1">Développeur
-                                    FullStack confirmé</p>
-                            </div>
-                            <span
-                                class="px-4 py-1.5 bg-slate-900/80 rounded-full border border-white/5 text-slate-400 text-sm font-semibold whitespace-nowrap">
-                                Avr. 2023 – Sept. 2023
-                            </span>
-                        </div>
-
-                        <p class="text-slate-400 mb-6 leading-relaxed">
-                            Réalisation d'un POC d'application mobile (marketplace C2C) avec Flutter et backend Django.
+                <article class="row">
+                    <span class="when">Avr. 2023 – Sept. 2023</span>
+                    <div>
+                        <h3>Indépendant</h3>
+                        <p class="role">Développeur FullStack confirmé</p>
+                        <p>Réalisation d'un POC d'application mobile (marketplace C2C) avec Flutter et backend Django.
                         </p>
-
-                        <ul class="grid md:grid-cols-2 gap-3 mb-8 text-slate-300 text-sm">
-                            <li class="flex items-start gap-3"><i class="fas fa-rocket text-accent-cyan mt-1"></i> Auth
-                                JWT & Geoloc PostGIS</li>
-                            <li class="flex items-start gap-3"><i class="fas fa-rocket text-accent-cyan mt-1"></i>
-                                Flutter: Auth, Cart, Payments</li>
-                            <li class="flex items-start gap-3"><i class="fas fa-rocket text-accent-cyan mt-1"></i>
-                                Firebase Chat & Notifications</li>
-                            <li class="flex items-start gap-3"><i class="fas fa-rocket text-accent-cyan mt-1"></i>
-                                Integration Lemonway & Google APIs</li>
+                        <ul class="points">
+                            <li>Auth JWT &amp; Geoloc PostGIS</li>
+                            <li>Flutter: Auth, Cart, Payments</li>
+                            <li>Firebase Chat &amp; Notifications</li>
+                            <li>Integration Lemonway &amp; Google APIs</li>
                         </ul>
                     </div>
-                </div>
+                </article>
 
-                <!-- Fieldbox -->
-                <div class="timeline-item pl-8 relative" data-aos="fade-up">
-                    <div class="glass card-hover rounded-3xl p-8 shadow-xl overflow-hidden group">
-                        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
-                            <div>
-                                <h3
-                                    class="text-2xl font-display font-bold text-white group-hover:text-accent-violet transition-colors">
-                                    Fieldbox</h3>
-                                <p class="text-accent-violet font-bold tracking-wide uppercase text-xs mt-1">Développeur
-                                    Django</p>
-                            </div>
-                            <span
-                                class="px-4 py-1.5 bg-slate-900/80 rounded-full border border-white/5 text-slate-400 text-sm font-semibold whitespace-nowrap">
-                                Sept. 2022 – Janv. 2023
-                            </span>
-                        </div>
-
-                        <p class="text-slate-400 mb-6 leading-relaxed italic">
-                            Surveillance de bateaux via capteurs de feu et de gaz sur une plateforme centralisée.
-                        </p>
-
-                        <ul class="grid md:grid-cols-2 gap-3 mb-8 text-slate-300 text-sm">
-                            <li class="flex items-start gap-3"><i class="fas fa-ship text-accent-violet mt-1"></i> REST
-                                API Development</li>
-                            <li class="flex items-start gap-3"><i class="fas fa-ship text-accent-violet mt-1"></i>
-                                Adaptive maintenance</li>
-                            <li class="flex items-start gap-3"><i class="fas fa-ship text-accent-violet mt-1"></i>
-                                ReactJS integration</li>
+                <article class="row">
+                    <span class="when">Sept. 2022 – Janv. 2023</span>
+                    <div>
+                        <h3>Fieldbox</h3>
+                        <p class="role">Développeur Django</p>
+                        <p>Surveillance de bateaux via capteurs de feu et de gaz sur une plateforme centralisée.</p>
+                        <ul class="points">
+                            <li>REST API Development</li>
+                            <li>Adaptive maintenance</li>
+                            <li>ReactJS integration</li>
                         </ul>
                     </div>
-                </div>
-                <!-- Makersquad -->
-                <div class="timeline-item pl-8 relative" data-aos="fade-up">
-                    <div class="glass card-hover rounded-3xl p-8 shadow-xl overflow-hidden group">
-                        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
-                            <div>
-                                <h3
-                                    class="text-2xl font-display font-bold text-white group-hover:text-accent-cyan transition-colors">
-                                    Makersquad</h3>
-                                <p class="text-accent-cyan font-bold tracking-wide uppercase text-xs mt-1">Expert Python
-                                    / Django</p>
-                            </div>
-                            <span
-                                class="px-4 py-1.5 bg-slate-900/80 rounded-full border border-white/5 text-slate-400 text-sm font-semibold whitespace-nowrap">
-                                Janv. 2022 – Mai 2022
-                            </span>
-                        </div>
-                        <p class="text-slate-400 mb-6 leading-relaxed">Evolution de l'espace client pour Enygea. Mise en
-                            place de tunnels de commande et synchronisation ERP.</p>
+                </article>
+
+                <article class="row">
+                    <span class="when">Janv. 2022 – Mai 2022</span>
+                    <div>
+                        <h3>Makersquad</h3>
+                        <p class="role">Expert Python / Django</p>
+                        <p>Evolution de l'espace client pour Enygea. Mise en place de tunnels de commande et
+                            synchronisation ERP.</p>
                     </div>
-                </div>
+                </article>
 
-                <!-- Merck Group -->
-                <div class="timeline-item pl-8 relative" data-aos="fade-up">
-                    <div class="glass card-hover rounded-3xl p-8 shadow-xl overflow-hidden group">
-                        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
-                            <div>
-                                <h3
-                                    class="text-2xl font-display font-bold text-white group-hover:text-accent-violet transition-colors">
-                                    Merck Group</h3>
-                                <p class="text-accent-violet font-bold tracking-wide uppercase text-xs mt-1">Développeur
-                                    NodeJS</p>
-                            </div>
-                            <span
-                                class="px-4 py-1.5 bg-slate-900/80 rounded-full border border-white/5 text-slate-400 text-sm font-semibold whitespace-nowrap">
-                                Sept. 2021 – Déc. 2021
-                            </span>
-                        </div>
-                        <p class="text-slate-400 mb-6 leading-relaxed italic">Participation au POC du service innovation
-                            (microservices NodeJS / NestJS).</p>
+                <article class="row">
+                    <span class="when">Sept. 2021 – Déc. 2021</span>
+                    <div>
+                        <h3>Merck Group</h3>
+                        <p class="role">Développeur NodeJS</p>
+                        <p>Participation au POC du service innovation (microservices NodeJS / NestJS).</p>
                     </div>
-                </div>
+                </article>
 
-                <!-- Meetips -->
-                <div class="timeline-item pl-8 relative" data-aos="fade-up">
-                    <div class="glass card-hover rounded-3xl p-8 shadow-xl overflow-hidden group">
-                        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
-                            <div>
-                                <h3
-                                    class="text-2xl font-display font-bold text-white group-hover:text-accent-cyan transition-colors">
-                                    Meetips</h3>
-                                <p class="text-accent-cyan font-bold tracking-wide uppercase text-xs mt-1">Développeur
-                                    FullStack confirmé</p>
-                            </div>
-                            <span
-                                class="px-4 py-1.5 bg-slate-900/80 rounded-full border border-white/5 text-slate-400 text-sm font-semibold whitespace-nowrap">
-                                Oct. 2019 – Mars 2020
-                            </span>
-                        </div>
-                        <p class="text-slate-400 mb-6 leading-relaxed">POC : création d'un concept de campagne de dons
-                            via visionnage de publicité (Django/Flutter).</p>
+                <article class="row">
+                    <span class="when">Oct. 2019 – Mars 2020</span>
+                    <div>
+                        <h3>Meetips</h3>
+                        <p class="role">Développeur FullStack confirmé</p>
+                        <p>POC : création d'un concept de campagne de dons via visionnage de publicité
+                            (Django/Flutter).</p>
                     </div>
-                </div>
+                </article>
 
-                <!-- Older Experiences (Condensed) -->
-                <div class="timeline-item pl-8 relative" data-aos="fade-up">
-                    <div class="glass card-hover rounded-3xl p-8 shadow-xl overflow-hidden group">
-                        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
-                            <div>
-                                <h3
-                                    class="text-2xl font-display font-bold text-white group-hover:text-accent-cyan transition-colors">
-                                    Catalyse IT</h3>
-                                <p class="text-accent-cyan font-bold tracking-wide uppercase text-xs mt-1">Ingénieur
-                                    d'évaluation et développement - Angular/Java
-                                    Spring.</p>
-                            </div>
-                            <span
-                                class="px-4 py-1.5 bg-slate-900/80 rounded-full border border-white/5 text-slate-400 text-sm font-semibold whitespace-nowrap">
-                                2018 – 2019
-                            </span>
-                        </div>
-                        <p class="text-slate-400 mb-6 leading-relaxed">Ingénieur d'évaluation et développement -
-                            Angular/Java
-                            Spring.</p>
+                <article class="row compact">
+                    <span class="when">2018 – 2019</span>
+                    <div>
+                        <h3>Catalyse IT</h3>
+                        <p class="role">Ingénieur d'évaluation et développement — Angular / Java Spring</p>
                     </div>
-                </div>
-                <div class="timeline-item pl-8 relative" data-aos="fade-up">
-                    <div class="glass card-hover rounded-3xl p-8 shadow-xl overflow-hidden group">
-                        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
-                            <div>
-                                <h3
-                                    class="text-2xl font-display font-bold text-white group-hover:text-accent-cyan transition-colors">
-                                    VHM Groupe</h3>
-                                <p class="text-accent-cyan font-bold tracking-wide uppercase text-xs mt-1">Développeur
-                                    web - VB.NET / AngularJS.</p>
-                            </div>
-                            <span
-                                class="px-4 py-1.5 bg-slate-900/80 rounded-full border border-white/5 text-slate-400 text-sm font-semibold whitespace-nowrap">
-                                2016 – 2017
-                            </span>
-                        </div>
-                        <p class="text-slate-400 mb-6 leading-relaxed">Développeur web - VB.NET / AngularJS.</p>
+                </article>
+
+                <article class="row compact">
+                    <span class="when">2016 – 2017</span>
+                    <div>
+                        <h3>VHM Groupe</h3>
+                        <p class="role">Développeur web — VB.NET / AngularJS</p>
                     </div>
-                </div>
-                <div class="timeline-item pl-8 relative" data-aos="fade-up">
-                    <div class="glass card-hover rounded-3xl p-8 shadow-xl overflow-hidden group">
-                        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
-                            <div>
-                                <h3
-                                    class="text-2xl font-display font-bold text-white group-hover:text-accent-cyan transition-colors">
-                                    SFERENO</h3>
-                                <p class="text-accent-cyan font-bold tracking-wide uppercase text-xs mt-1">Développeur
-                                    web - Python / Django / AngularJS.</p>
-                            </div>
-                            <span
-                                class="px-4 py-1.5 bg-slate-900/80 rounded-full border border-white/5 text-slate-400 text-sm font-semibold whitespace-nowrap">
-                                2015 – 2016
-                            </span>
-                        </div>
-                        <p class="text-slate-400 mb-6 leading-relaxed">Développeur web - Python / Django / AngularJS.
-                        </p>
+                </article>
+
+                <article class="row compact">
+                    <span class="when">2015 – 2016</span>
+                    <div>
+                        <h3>SFERENO</h3>
+                        <p class="role">Développeur web — Python / Django / AngularJS</p>
                     </div>
-                </div>
+                </article>
             </div>
-    </section>
+        </section>
 
-    <!-- Tech Stack -->
-    <section id="skills" class="mb-32 scroll-mt-28">
-        <h2 class="text-3xl font-display font-black tracking-tighter text-white mb-16 flex items-center gap-4"
-            data-aos="fade-right">
-            <span class="w-12 h-1 bg-gradient-accent rounded-full"></span>
-            TECH STACK
-        </h2>
-
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6" data-aos="fade-up">
-            <div class="glass card-hover p-6 rounded-3xl flex flex-col items-center justify-center gap-4 group">
-                <div
-                    class="w-16 h-16 bg-slate-900/50 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <i class="devicon-python-plain colored text-4xl"></i>
-                </div>
-                <span class="text-sm font-bold tracking-tight text-slate-300">Python</span>
-            </div>
-            <div class="glass card-hover p-6 rounded-3xl flex flex-col items-center justify-center gap-4 group">
-                <div
-                    class="w-16 h-16 bg-slate-900/50 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <i class="devicon-django-plain colored text-4xl"></i>
-                </div>
-                <span class="text-sm font-bold tracking-tight text-slate-300">Django</span>
-            </div>
-            <div class="glass card-hover p-6 rounded-3xl flex flex-col items-center justify-center gap-4 group">
-                <div
-                    class="w-16 h-16 bg-slate-900/50 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <i class="devicon-flask-original colored text-4xl"></i>
-                </div>
-                <span class="text-sm font-bold tracking-tight text-slate-300">Flask</span>
-            </div>
-            <div class="glass card-hover p-6 rounded-3xl flex flex-col items-center justify-center gap-4 group">
-                <div
-                    class="w-16 h-16 bg-slate-900/50 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <i class="devicon-javascript-plain colored text-4xl"></i>
-                </div>
-                <span class="text-sm font-bold tracking-tight text-slate-300">JavaScript</span>
-            </div>
-            <div class="glass card-hover p-6 rounded-3xl flex flex-col items-center justify-center gap-4 group">
-                <div
-                    class="w-16 h-16 bg-slate-900/50 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <i class="devicon-typescript-plain colored text-4xl"></i>
-                </div>
-                <span class="text-sm font-bold tracking-tight text-slate-300">TypeScript</span>
-            </div>
-            <div class="glass card-hover p-6 rounded-3xl flex flex-col items-center justify-center gap-4 group">
-                <div
-                    class="w-16 h-16 bg-slate-900/50 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <i class="devicon-angularjs-plain colored text-4xl"></i>
-                </div>
-                <span class="text-sm font-bold tracking-tight text-slate-300">Angular</span>
-            </div>
-            <div class="glass card-hover p-6 rounded-3xl flex flex-col items-center justify-center gap-4 group">
-                <div
-                    class="w-16 h-16 bg-slate-900/50 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <i class="devicon-flutter-plain colored text-4xl"></i>
-                </div>
-                <span class="text-sm font-bold tracking-tight text-slate-300">Flutter</span>
-            </div>
-            <div class="glass card-hover p-6 rounded-3xl flex flex-col items-center justify-center gap-4 group">
-                <div
-                    class="w-16 h-16 bg-slate-900/50 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <i class="devicon-docker-plain colored text-4xl"></i>
-                </div>
-                <span class="text-sm font-bold tracking-tight text-slate-300">Docker</span>
-            </div>
-            <div class="glass card-hover p-6 rounded-3xl flex flex-col items-center justify-center gap-4 group">
-                <div
-                    class="w-16 h-16 bg-slate-900/50 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <i class="devicon-kubernetes-plain colored text-4xl"></i>
-                </div>
-                <span class="text-sm font-bold tracking-tight text-slate-300">Kubernetes</span>
-            </div>
-            <div class="glass card-hover p-6 rounded-3xl flex flex-col items-center justify-center gap-4 group">
-                <div
-                    class="w-16 h-16 bg-slate-900/50 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <i class="devicon-postgresql-plain colored text-4xl"></i>
-                </div>
-                <span class="text-sm font-bold tracking-tight text-slate-300">PostgreSQL</span>
-            </div>
-            <div class="glass card-hover p-6 rounded-3xl flex flex-col items-center justify-center gap-4 group">
-                <div
-                    class="w-16 h-16 bg-slate-900/50 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <i class="devicon-amazonwebservices-original colored text-4xl"></i>
-                </div>
-                <span class="text-sm font-bold tracking-tight text-slate-300">AWS</span>
-            </div>
-            <div class="glass card-hover p-6 rounded-3xl flex flex-col items-center justify-center gap-4 group">
-                <div
-                    class="w-16 h-16 bg-slate-900/50 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <i class="fas fa-microchip text-accent-cyan text-4xl"></i>
-                </div>
-                <span class="text-sm font-bold tracking-tight text-slate-300">Embedded IoT</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- Education -->
-    <section id="education" class="mb-32 scroll-mt-28">
-        <h2 class="text-3xl font-display font-black tracking-tighter text-white mb-16 flex items-center gap-4"
-            data-aos="fade-right">
-            <span class="w-12 h-1 bg-gradient-accent rounded-full"></span>
-            FORMATIONS
-        </h2>
-
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <!-- Tech Lead -->
-            <div class="glass card-hover rounded-3xl p-8 relative overflow-hidden group" data-aos="zoom-in"
-                data-aos-delay="100">
-                <div
-                    class="absolute -top-4 -right-4 w-16 h-16 bg-accent-cyan/10 rounded-full blur-xl group-hover:scale-150 transition-transform">
-                </div>
-                <div class="mb-6">
-                    <span class="text-xs font-bold text-accent-cyan tracking-widest uppercase">2020 - 2021</span>
-                    <h3 class="text-xl font-display font-bold text-white mt-1">OpenClassrooms</h3>
-                </div>
-                <p class="text-slate-400 text-sm leading-relaxed">Tech Lead (Master 2) — Ingénierie informatique</p>
+        <!-- Tech Stack -->
+        <section id="skills" class="sec">
+            <div class="sec-head">
+                <span class="n">03</span>
+                <h2>Compétences</h2>
             </div>
 
-            <!-- Licence Pro -->
-            <div class="glass card-hover rounded-3xl p-8 relative overflow-hidden group" data-aos="zoom-in"
-                data-aos-delay="200">
-                <div class="mb-6">
-                    <span class="text-xs font-bold text-accent-cyan tracking-widest uppercase">2016 - 2017</span>
-                    <h3 class="text-xl font-display font-bold text-white mt-1">IUT Schuman</h3>
-                </div>
-                <p class="text-slate-400 text-sm leading-relaxed">Licence Professionnelle Informatique</p>
-            </div>
-
-            <!-- DUT -->
-            <div class="glass card-hover rounded-3xl p-8 relative overflow-hidden group" data-aos="zoom-in"
-                data-aos-delay="300">
-                <div class="mb-6">
-                    <span class="text-xs font-bold text-accent-cyan tracking-widest uppercase">2013 - 2016</span>
-                    <h3 class="text-xl font-display font-bold text-white mt-1">IUT Schuman</h3>
-                </div>
-                <p class="text-slate-400 text-sm leading-relaxed">DUT Informatique</p>
-            </div>
-
-            <!-- Bac -->
-            <div class="glass card-hover rounded-3xl p-8 relative overflow-hidden group" data-aos="zoom-in"
-                data-aos-delay="400">
-                <div class="mb-6">
-                    <span class="text-xs font-bold text-accent-cyan tracking-widest uppercase">2010 - 2013</span>
-                    <h3 class="text-xl font-display font-bold text-white mt-1">Lycée Couffignal</h3>
-                </div>
-                <p class="text-slate-400 text-sm leading-relaxed">Baccalauréat scientifique</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Languages -->
-    <section class="mb-32">
-        <h2 class="text-3xl font-display font-black tracking-tighter text-white mb-16 flex items-center gap-4"
-            data-aos="fade-right">
-            <span class="w-12 h-1 bg-gradient-accent rounded-full"></span>
-            LANGUES
-        </h2>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="glass p-8 rounded-3xl flex items-center justify-between group" data-aos="fade-up"
-                data-aos-delay="100">
+            <div class="skills">
                 <div>
-                    <span class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Langue</span>
-                    <span
-                        class="text-xl font-bold text-white group-hover:text-accent-cyan transition-colors">Français</span>
+                    <h3>Backend</h3>
+                    <ul>
+                        <li>Python</li>
+                        <li>Django</li>
+                        <li>Flask</li>
+                    </ul>
                 </div>
-                <span class="text-accent-cyan font-mono text-sm px-3 py-1 bg-accent-cyan/10 rounded-lg">Natif</span>
-            </div>
-            <div class="glass p-8 rounded-3xl flex items-center justify-between group" data-aos="fade-up"
-                data-aos-delay="200">
                 <div>
-                    <span class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Langue</span>
-                    <span
-                        class="text-xl font-bold text-white group-hover:text-accent-cyan transition-colors">Turc</span>
+                    <h3>Front et mobile</h3>
+                    <ul>
+                        <li>JavaScript</li>
+                        <li>TypeScript</li>
+                        <li>Angular</li>
+                        <li>Flutter</li>
+                    </ul>
                 </div>
-                <span class="text-accent-cyan font-mono text-sm px-3 py-1 bg-accent-cyan/10 rounded-lg">Natif</span>
-            </div>
-            <div class="glass p-8 rounded-3xl flex items-center justify-between group" data-aos="fade-up"
-                data-aos-delay="300">
                 <div>
-                    <span class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-1">Langue</span>
-                    <span
-                        class="text-xl font-bold text-white group-hover:text-accent-cyan transition-colors">Anglais</span>
+                    <h3>Données et infra</h3>
+                    <ul>
+                        <li>PostgreSQL</li>
+                        <li>Docker</li>
+                        <li>Kubernetes</li>
+                        <li>AWS</li>
+                    </ul>
                 </div>
-                <span class="text-accent-cyan font-mono text-sm px-3 py-1 bg-accent-cyan/10 rounded-lg">Courant</span>
+                <div>
+                    <h3>Autre</h3>
+                    <ul>
+                        <li>Embedded IoT</li>
+                    </ul>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Footer -->
-    <footer class="text-center py-16 text-slate-500 text-sm border-t border-white/5">
-        <div class="flex justify-center gap-8 mb-8">
-            <a href="https://github.com" class="hover:text-accent-cyan transition-colors text-xl"><i
-                    class="fab fa-github"></i></a>
-            <a href="https://linkedin.com/in/fatih-turhan" class="hover:text-accent-cyan transition-colors text-xl"><i
-                    class="fab fa-linkedin"></i></a>
-            <a href="mailto:fatih.turhan@outlook.fr" class="hover:text-accent-cyan transition-colors text-xl"><i
-                    class="fas fa-envelope"></i></a>
-        </div>
-        <p class="font-medium tracking-tight">
-            &copy; 2026 FATIH TURHAN — DESIGNED FOR EXCELLENCE
-        </p>
-        <p class="text-xs mt-2 opacity-50">Built with <span class="text-accent-cyan">Tailwind CSS</span> & <span
-                class="text-accent-violet">AOS</span></p>
+        <!-- Education -->
+        <section id="education" class="sec">
+            <div class="sec-head">
+                <span class="n">04</span>
+                <h2>Formation</h2>
+            </div>
+
+            <div>
+                <article class="row compact">
+                    <span class="when">2020 – 2021</span>
+                    <div>
+                        <h3>OpenClassrooms</h3>
+                        <p class="role">Tech Lead (Master 2) — Ingénierie informatique</p>
+                    </div>
+                </article>
+                <article class="row compact">
+                    <span class="when">2016 – 2017</span>
+                    <div>
+                        <h3>IUT Schuman</h3>
+                        <p class="role">Licence Professionnelle Informatique</p>
+                    </div>
+                </article>
+                <article class="row compact">
+                    <span class="when">2013 – 2016</span>
+                    <div>
+                        <h3>IUT Schuman</h3>
+                        <p class="role">DUT Informatique</p>
+                    </div>
+                </article>
+                <article class="row compact">
+                    <span class="when">2010 – 2013</span>
+                    <div>
+                        <h3>Lycée Couffignal</h3>
+                        <p class="role">Baccalauréat scientifique</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Languages -->
+        <section id="languages" class="sec">
+            <div class="sec-head">
+                <span class="n">05</span>
+                <h2>Langues</h2>
+            </div>
+
+            <div class="langs">
+                <div><b>Français</b><span>Natif</span></div>
+                <div><b>Turc</b><span>Natif</span></div>
+                <div><b>Anglais</b><span>Courant</span></div>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section id="contact" class="sec">
+            <div class="sec-head">
+                <span class="n">06</span>
+                <h2>Contact</h2>
+                <p>Disponible pour une mission freelance.</p>
+            </div>
+
+            <div>
+                <a class="big-mail" href="mailto:fatih.turhan@outlook.fr">fatih.turhan@outlook.fr</a>
+                <p class="contact-line">
+                    <a href="tel:+33636845738">06.36.84.57.38</a>
+                    <span>Strasbourg</span>
+                    <a href="https://linkedin.com/in/fatih-turhan" target="_blank" rel="noopener">LinkedIn ↗</a>
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="wrap foot">
+        <span>© 2026 Fatih Turhan</span>
+        <span>fatihturhan.dev</span>
     </footer>
-    </div>
-
-    <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <script>
-        AOS.init({
-            duration: 1000,
-            once: true,
-            offset: 50,
-            easing: 'ease-in-out-cubic'
-        });
-
-        // Scroll Progress Bar
-        window.onscroll = function () {
-            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            let scrolled = (winScroll / height) * 100;
-            document.getElementById("progressBar").style.width = scrolled + "%";
-        };
-
-        // Smooth scrolling for nav links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const id = this.getAttribute('href');
-                if (id === '#') {
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                    return;
-                }
-                document.querySelector(id)?.scrollIntoView({ behavior: 'smooth' });
-            });
-        });
-    </script>
 </body>
 
 </html>

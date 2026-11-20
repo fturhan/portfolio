@@ -1,9 +1,9 @@
 # Portfolio — fatihturhan.dev
 
-CV en ligne de Fatih Turhan : une seule page statique (`index.html`, Tailwind et AOS chargés
-depuis un CDN), sans étape de build.
+CV en ligne de Fatih Turhan : une seule page statique (`index.html`, CSS écrit à la main, police
+Archivo depuis Google Fonts), sans JavaScript ni étape de build.
 
-Sections : projets en cours, expériences, compétences, formations, langues.
+Sections : projets en cours, expérience, compétences, formation, langues, contact.
 
 ## Voir le site en local
 
